@@ -1,0 +1,54 @@
+{
+  "name": "openhiggsfield-desktop",
+  "productName": "OpenHiggsfield",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OpenHiggsfield AI studio as a desktop app",
+  "main": "main.cjs",
+  "scripts": {
+    "prepare-server": "node scripts/prepare-server.mjs",
+    "start": "npm run prepare-server && electron .",
+    "dist": "npm run prepare-server && electron-builder",
+    "dist:win": "npm run prepare-server && electron-builder --win",
+    "dist:mac": "npm run prepare-server && electron-builder --mac",
+    "dist:linux": "npm run prepare-server && electron-builder --linux"
+  },
+  "devDependencies": {
+    "electron": "45.1.0",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "ai.openhiggsfield.desktop",
+    "productName": "OpenHiggsfield",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.cjs",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.graphics-design",
+      "icon": "build/icon.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "category": "Graphics",
+      "icon": "build/icon.png",
+      "syncDesktopName": true
+    },
+    "publish": null,
+    "afterPack": "scripts/after-pack.cjs"
+  },
+  "desktopName": "openhiggsfield.desktop"
+}

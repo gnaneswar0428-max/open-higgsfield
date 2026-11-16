@@ -126,6 +126,34 @@ OPEN_HIGGSFIELD_READ_WRITE_TOKEN=     # Vercel Blob read-write token
 | `pnpm start` | Serve the production build |
 | `pnpm brand` | Rebuild the icons and OG card in `public/` |
 
+### Desktop app
+
+`desktop/` wraps the studio as an Electron app for Windows, macOS and Linux.
+It bundles a standalone build of this app and runs it on `127.0.0.1:47821`
+inside the app window, so nothing else needs to be installed to use it.
+
+Build the installer on the operating system you want it for (Node 22 and
+pnpm required):
+
+```bash
+cd desktop
+npm install
+npm run dist          # installer lands in desktop/release/
+```
+
+`npm run dist` builds for the current system: an `.exe` installer on Windows,
+a `.dmg` on macOS, an `.AppImage` on Linux. `npm start` runs the app without
+packaging it.
+
+Settings live in a `.env` file in the app's data folder. Open it from
+**File → Edit Settings (.env)…**, fill in `HF_API_BASE_URL` and
+`OPEN_HIGGSFIELD_READ_WRITE_TOKEN`, save, then **File → Restart App**. The
+platform key is entered in the studio as usual.
+
+The installers are unsigned, so Windows SmartScreen and macOS Gatekeeper warn
+on first launch. On Windows choose **More info → Run anyway**; on macOS
+right-click the app and choose **Open**.
+
 ---
 
 ## Layout
